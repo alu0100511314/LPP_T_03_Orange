@@ -58,3 +58,44 @@ class Orange
   private :producirFruta, :morir
 
 end
+
+if __FILE__ == $0
+  n = Naranjero.new 2, 5
+  q = Queue.new
+  tCrecimiento = Thread.new do
+                     while n.estado == ESTADO_NARANJERO::VIVO do
+                       delay = 2
+                       puts "> Crecimiento del naranjero detenido durante #{delay} segundos"
+                       sleep delay
+                       puts "> Crecimiento del naranjero reanimado después de dormir #{delay} segundos"
+                       n.uno_mas
+                       puts "> Crecimiento del naranjero en una unidad"
+                       q.enq n
+                       delay = 4
+                       puts "> Crecimiento del naranjero detenido durante #{delay} segundos"
+                       sleep delay
+                       puts "> Crecimiento del naranjero reanimado después de dormir #{delay} segundos"
+                       n.uno_mas
+                       puts "> Crecimiento del naranjero en una unidad"
+                       q.enq n
+                     end
+                 end
+  tRecogida = Thread.new do
+                  while n.estado == ESTADO_NARANJERO::VIVO do
+                    delay = 0
+                    puts "- Recogida de naranjas detenida durante #{delay} segundos"
+                    sleep delay
+                    puts "- Recogida de naranjas reanimada después de dormir #{delay} segundos"
+                    puts "- Recogida de naranjas esperando pacientemente ..."
+                    puts "- #{q.deq.recolectar_una}"
+                    delay = 4
+                    puts "- Recogida de naranjas detenida durante #{delay} segundos"
+                    sleep delay
+                    puts "- Recogida de naranjas reanimada después de dormir #{delay} segundos"
+                    puts "- Recogida de naranjas esperando pacientemente ..."
+                    puts "- #{q.deq.recolectar_una}"
+                  end
+                end
+  tCrecimiento.join
+  tRecogida.join
+end
