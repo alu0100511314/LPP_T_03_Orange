@@ -1,16 +1,21 @@
+# encoding: utf-8
 #!/usr/bin/env ruby
 require 'thread'
 
+# Constante ligada a la máxima edad posible del naranjero
 MAX_EDAD = 10
 
+# Módulo representativo de los estados posibles del naranjero
 module ESTADO_NARANJERO
   VIVO = 0 
   MUERTO = 1 
 end
 
+# Clase gestora del comportamiento del naranjero
 class Orange
   attr_accessor :altura, :edad, :contador, :estado, :inc_altura, :min_fruto
   
+  # Instancia un nuevo objeto de la clase Orange indicando el incremento de altura y la edad mínima a la cual da frutos.
   def initialize(*args)
     raise ArgumentError unless (args.size == 2)
     @altura = 0 
@@ -21,6 +26,7 @@ class Orange
     @min_fruto = args[1]
   end 
   
+  # Incrementa la edad del naranjero en uno si es posible. En caso contrario, mata el naranjero.
   def uno_mas
     @edad += 1
     if @edad < MAX_EDAD
@@ -32,6 +38,7 @@ class Orange
     @edad
   end 
 
+  # Recoleta una naranja si es posible y devuelve un mensaje ligado al resultado.
   def recolectar_una
     s = ""
     if @estado == ESTADO_NARANJERO::MUERTO
@@ -47,10 +54,12 @@ class Orange
     s   
   end 
 
+  # Devuelve una nueva cantidad de frutas a partir de la edad actual.
   def producirFruta
     @edad + 2 
   end 
 
+  # Cambia el estado del naranjero de vivo a muerto
   def morir
     @estado = ESTADO_NARANJERO::MUERTO
   end 

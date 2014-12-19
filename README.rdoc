@@ -1,6 +1,6 @@
 Desarrollo de la gema Ruby: Orange
 ====================================
-[![Coverage Status](https://img.shields.io/coveralls/alu0100511314/LPP_T_03_Orange.svg)](https://coveralls.io/r/alu0100511314/LPP_T_03_Orange?branch=desarrollo)
+{<img src="https://coveralls.io/repos/alu0100511314/LPP_T_03_Orange/badge.png?branch=desarrollo" alt="Coverage Status" />}[https://coveralls.io/r/alu0100511314/LPP_T_03_Orange?branch=desarrollo]
 
 # Descripción del equipo
   * Nombre del equipo: LPP_T_3
