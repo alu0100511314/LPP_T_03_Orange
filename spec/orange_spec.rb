@@ -32,6 +32,36 @@ class Orange
 		it "Metodo privado donde debe producir fruta" do
                   expect(@o.private_methods.include? :producirFruta).to eq(true)
                 end
+		it "Debe calcular bien la edad" do
+                  q = Queue.new
+                  t1 = Thread.new do
+                        while @o.estado == ESTADO_NARANJERO::VIVO do
+                           delay = 1
+                           sleep delay
+                           @o.uno_mas
+                           q.enq @o
+                           delay = 2
+                           sleep delay
+                           @o.uno_mas
+                           q.enq @o
+                        end
+                        @o.edad
+                  end
+                  t2 = Thread.new do
+                        while @o.estado == ESTADO_NARANJERO::VIVO do
+                           delay = 0
+                           sleep delay
+                           q.deq.recolectar_una
+                           delay = 2
+                           sleep delay
+                           q.deq.recolectar_una
+                        end
+                  end
+                  t1.join
+                  t2.join
+                  expect(t1.value)== 10
+
+                end
      	end
      end 
 end
